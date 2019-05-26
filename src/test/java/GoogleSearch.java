@@ -5,25 +5,56 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 public class GoogleSearch{
 
     WebDriver driver;
 
+    @BeforeSuite
+    public void beforeSuite(){
+        System.setProperty("webdriver.gecko.driver", "/Users/elenakot/IdeaProjects/AwesomeJavaWebdriver/src/test/resources/drivers/geckodriver 2");
+        driver = new FirefoxDriver();
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        driver.manage().deleteAllCookies();
+    }
+
+    @AfterSuite
+    public void afterSuite(){
+        driver.close();
+    }
+
     @Test
     public void test001(){
-        System.setProperty("webdriver.gecko.driver", "/Users/elenakot/IdeaProjects/AwesomeJavaWebdriver/src/test/resources/drivers/geckodriver 2");
 
-        driver = new FirefoxDriver();
+        String textValue = "portnov computer school";
 
         openMainPage();
-        typeQuery();
+        typeQuery(textValue);
         submitSearch();
         waitForResults();
         assertResultPage();
 
         }
+
+    @Test
+    public void test002(){
+
+        String textValue = "000GGIHi889";
+
+        openMainPage();
+        typeQuery(textValue);
+        submitSearch();
+        waitForResults();
+        assertResultPage();
+
+    }
 
     private void waitForResults() {
         By resultsStatElement = By.id("resultStats");
@@ -43,9 +74,9 @@ public class GoogleSearch{
         searchInput.submit();
     }
 
-    private void typeQuery() {
+    private void typeQuery(String queryText) {
         WebElement searchInput = driver.findElement(By.cssSelector(".gLFyf"));
-        searchInput.sendKeys("portnov computer school");
+        searchInput.sendKeys(queryText);
     }
 
     private void openMainPage() {
