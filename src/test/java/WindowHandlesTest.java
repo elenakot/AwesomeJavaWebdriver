@@ -44,12 +44,6 @@ public class WindowHandlesTest {
         checkWindowTwoOpenedCorrectly();
         checkWindowOneOpenedCorrectly();
 
-
-    @Test
-    public void test002(){
-
-        }
-
     }
 
     private void checkWindowOneOpenedCorrectly() {
