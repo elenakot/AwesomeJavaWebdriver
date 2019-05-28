@@ -32,7 +32,7 @@ public class CheckboxesTest {
     @Test
     public void test001(){
         openCheckboxesPage();
-        findCheckboxesByTagnameInput();
+        findCheckboxesByTagname();
         defineStatusOfCheckboxes();
         clickOnCheckbox1();
         defineStatusOfCheckbox1();
@@ -44,7 +44,6 @@ public class CheckboxesTest {
 
         String expectedAttributeValue = "true";
         Assert.assertEquals(expectedAttributeValue, attributeValue1);
-
     }
 
     private void clickOnCheckbox1() {
@@ -59,7 +58,7 @@ public class CheckboxesTest {
         Assert.assertNotNull(attributeValue2);
     }
 
-    private void findCheckboxesByTagnameInput() {
+    private void findCheckboxesByTagname() {
         List<WebElement> listOfInputs = driver.findElements(By.tagName("Input"));
 
         int listSize = listOfInputs.size();
