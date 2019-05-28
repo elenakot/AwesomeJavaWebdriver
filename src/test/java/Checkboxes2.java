@@ -15,8 +15,6 @@ import java.util.List;
         WebDriver driver;
         WebElement checkBox1;
         WebElement checkBox2;
-        boolean checkBox1IsDisplayed;
-        boolean checkBox2IsDisplayed;
 
 
         @BeforeSuite
@@ -39,16 +37,8 @@ import java.util.List;
             defineStatusOfCheckbox1();
         }
 
-        @Test
-        public void test002(){
-            openCheckboxesPage();
-            findCheckboxesByTagname();
-            verifyLabels();
-        }
-
         private void defineStatusOfCheckbox1() {
             Assert.assertEquals(checkBox1.isSelected(), true);
-
         }
 
         private void clickOnCheckbox1() {
@@ -56,7 +46,6 @@ import java.util.List;
         }
 
         private void defineStatusOfCheckboxes() {
-
 
             Assert.assertEquals(checkBox1.isSelected(), false);
             Assert.assertEquals(checkBox2.isSelected(), true);
