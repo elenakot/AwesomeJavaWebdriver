@@ -1,9 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class BasicAuthTest {
 
@@ -17,18 +15,28 @@ public class BasicAuthTest {
         driver = new FirefoxDriver();}
 
 
+    @AfterMethod
+    public void closeBrowser() {
+        driver.quit();
+    }
+
+
     @Test
     public void test001() {
+        String login = "admin";
+        String password = "admin";
 
-        openBasicAuthPage();
+        openBasicAuthPage(login, password);
         assertThatAuthenticated();
     }
 
     @DataProvider (name = "dataForAuthTest")
-    public Object[][] dataForAuthTest() {
+    public Object[][] dataForTest() {
         return new Object[][] {
                 {"admin", "admin"},
                 {"admin1234", "admin1234"},
+                {"12321", "123123"},
+                {"2131", "admi12321#@#@@!@!n1233213"},
         };
     }
 
@@ -50,10 +58,8 @@ public class BasicAuthTest {
     }
 
     private void openBasicAuthPage(String login, String password) {
-        String login = "admin";
-        String password = "admin";
-        String url = "https://" + login + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth";
 
+        String url = "https://" + login + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth";
         driver.get(url);
     }
 

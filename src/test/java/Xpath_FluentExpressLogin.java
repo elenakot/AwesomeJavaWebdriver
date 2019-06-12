@@ -16,16 +16,29 @@ public class Xpath_FluentExpressLogin {
         driver = new FirefoxDriver(); }
 
 
+
     @Test
     public void test001() {
-        String xpath1 = "";
-        //WebElement element = driver.findElement(By.ByXPath(xpath1));
 
-        String adsXpath = "html/body/div[1]/div[2]/div[2]/div[1]/form/div[1]/div/div[1]/div/div/input[1]";
+        credentialsInput();
+        //assertThatAuthenticated();
 
-        String relativeXpath = "//form/div[1]/div/div[1]/div/div/input[1]";
-        String xpath2 ="//<input>[@name='email']";
+    }
 
+    private void credentialsInput() {
+
+        driver.get("http://fluentexpress-qa.northeurope.cloudapp.azure.com/login");
+
+        String loginXpath = "//input[@name='email']";
+        String passwordXpath = "//input[@name='password']";
+        String logInButton = "//button[@data-test='login-btn']";
+
+        WebElement login = driver.findElement(By.xpath(loginXpath));
+        login.sendKeys("casusdr@gmail.com");
+        WebElement password = driver.findElement(By.xpath(passwordXpath));
+        password.sendKeys("Ro7I6kCW6enbwKm1zJUk");
+        WebElement button = driver.findElement(By.xpath(logInButton));
+        button.click();
 
 
     }
